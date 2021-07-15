@@ -1,0 +1,82 @@
+Uniform Commercial Code System
+
+Public Data Export Table Documentation
+
+Dated April.2009
+Target Audience
+It is assumed that if the core data is requested from the Secretary of State, that the requesting party will have an experienced relational database person available to use it. This document is meant as a guide for this person.
+Overview of the export process
+The export process is a complete set of all data and tables at a point in time. We will call this the ‘UccCore’. 
+Table Design and Relations
+You will find in this zipped package four comma formatted text files containing the tables Filings, FilingAmendments, Debtors and SecuredParties. 
+When imported into a relational database and properly related, these files make what we call the UccCore. 
+Also included is a sql script file titled CreateAllTables.sql that describes the table structure.
+The center of the table structure is the Filings table. It has a primary key called the FileNumber. All other tables are related to it in a one to many relationship between the Filings Table Primary Key, FileNumber, (ONE) and the Foreign Key, FileNumber (MANY), found in each of the other tables.
+ 
+
+A listing of the tables follows:
+
+  
+UID = Record Unique Identifier. Will be unique values for the recordset
+Pkey <table> = Primary Key for the <table> (Primary Relation)
+Fkey <table> = Foreign Key for the <table> (Child Table)
+ 
+ 
+
+ 
+ [Filings]
+    [FileNumber] [varchar] (16) ,	Pkey
+    [FileDateTime] [varchar] (16),
+    [Type] [varchar] (50) ,
+    [AltFilingTypeId] [varchar] (50),
+    [OriginalFileNumber] [varchar] (15) ,
+    [LapseDate] [varchar] (16) ,
+    [PageCount] [varchar] (4),
+ 
+ 
+[Debtors] 
+    [FileNumber] [varchar] (16)	Fkey
+    [NamePosition] [varchar] (4)
+    [OrganizationalType] [varchar] (20) 
+    [OrganizationName] [varchar] (300)
+    [LastName] [varchar] (100),
+    [FirstName] [varchar] (100),
+    [MiddleName] [varchar] (100),
+    [Suffix] [varchar] (50),
+    [addr1] [varchar] (150),
+    [addr2] [varchar] (100),
+    [addr3] [varchar] (50),
+    [addr4] [varchar] (50),
+    [City] [varchar] (100),
+    [State] [varchar] (50),
+    [PostalCode] [varchar] (15),
+    [County] [varchar] (50),
+    [Country] [varchar] (50),
+    [MailAddress] [varchar] (255) 
+
+ 
+ [FilingAmendments] 	Fkey
+    [FileNumber] [varchar] (16)   ,
+    [AmendmentType] [varchar] (50) ,
+
+ 
+ [SecuredParties] 	Fkey
+    [FileNumber] [varchar] (16)
+    [NamePosition] [varchar] (4),
+    [PartyTypeId] [varchar] (4) ,
+    [OrganizationalType] [varchar] (20),
+    [OrganizationName] [varchar] (300)
+    [LastName] [varchar] (100),
+    [FirstName] [varchar] (50) ,
+    [MiddleName] [varchar] (50),
+    [Suffix] [varchar] (10),
+    [addr1] [varchar] (150),
+    [addr2] [varchar] (100),
+    [addr3] [varchar] (50),
+    [addr4] [varchar] (50),
+    [City] [varchar] (100,
+    [State] [varchar] (20),
+    [PostalCode] [varchar] (15) 
+    [County] [varchar] (30),
+    [Country] [varchar] (50),
+    [MailAddress] [varchar] (255) 
